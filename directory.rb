@@ -4,7 +4,7 @@ def input_students
   name = gets.chomp
   while !name.empty?
     cohort = input_cohort
-    @students << {name: name.capitalize, cohort: cohort}
+    @students << {name: name.gsub(/\w+/, &:capitalize), cohort: cohort}
     puts "Now we have #{@students.count} students"
     name = gets.chomp
   end
