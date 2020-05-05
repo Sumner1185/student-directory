@@ -5,8 +5,12 @@ def input_students
   name = gets.chomp
   while !name.empty?
     puts "Please add the students cohort"
-    cohort = gets.chomp.to_sym
-    students << {name: name, cohort: cohort}
+    cohort = gets.chomp.capitlaize.to_sym
+    unless cohorts.include?(cohort)
+      puts "Type error: please enter student and cohort again"
+    else
+      students << {name: name, cohort: cohort}
+    end
     puts "Now we have #{students.count} students"
     name = gets.chomp
   end
