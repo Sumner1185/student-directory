@@ -1,10 +1,10 @@
 def input_students
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
-  name = gets.capitalize.chomp
+  name = gets.chomp
   while !name.empty?
     cohort = input_cohort
-    @students << {name: name, cohort: cohort}
+    @students << {name: name.capitalize, cohort: cohort}
     puts "Now we have #{@students.count} students"
     name = gets.chomp
   end
@@ -13,10 +13,10 @@ def input_cohort
   cohorts = [:January, :February, :March, :April, :May, :June, 
   :July, :August, :September, :October, :November, :December]
   puts "Please add the students cohort"
-    input = gets.capitalize.chomp.to_sym
-    unless cohorts.include?(input)
+    cohort = gets.capitalize.chomp.to_sym
+    unless cohorts.include?(cohort)
         puts "Type error"
-        cohort = input_cohort
+        input_cohort
     end
     cohort
 end
@@ -24,7 +24,7 @@ def print_header
   puts "The students of Villains Academy"
   puts "-------------"
 end
-def print
+def print_student_list
   if @students.length >= 1
     @students.each_with_index do |student, index|
       puts "#{index + 1}. #{student[:name]} (#{student[:cohort]} cohort)"
@@ -50,7 +50,7 @@ def print_menu
 end
 def show_students
   print_header
-  print
+  print_student_list
   print_footer
 end
 def process(selection)
@@ -68,6 +68,3 @@ end
 
 @students = []
 menu = interactive_menu
-print_header
-print
-print_footer
