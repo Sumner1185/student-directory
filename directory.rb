@@ -1,26 +1,26 @@
 def input_students
-  cohorts = [:January, :February, :March, :April, :May, :June, 
-    :July, :August, :September, :October, :November, :December]
   puts "Please enter the names of the students"
   puts "To finish, just hit return twice"
   students = []
-  name = gets.chomp
+  name = gets.capitalize.chomp
   while !name.empty?
-    puts "Please add the students cohort"
-    cohort = gets.capitalize.chomp.to_sym
-    unless cohorts.include?(cohort)
-      puts "Type error: please enter student and cohort again"
-    else
-      students << {name: name, cohort: cohort}
-    end
-    if students.length == 1 
-      puts "Now we have #{students.count} student"
-    elsif students.length > 1
-      puts "Now we have #{students.count} students"
-    end
+    cohort = input_cohort
+    students << {name: name, cohort: cohort}
+    puts "Now we have #{students.count} students"
     name = gets.chomp
   end
   students
+end
+def input_cohort
+  cohorts = [:January, :February, :March, :April, :May, :June, 
+  :July, :August, :September, :October, :November, :December]
+  puts "Please add the students cohort"
+    cohort = gets.capitalize.chomp.to_sym
+    unless cohorts.include?(cohort)
+        puts "Type error"
+        cohort = input_cohort
+    end
+    cohort
 end
 def print_header
   puts "The students of Villains Academy"
